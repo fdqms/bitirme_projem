@@ -7,3 +7,5 @@ rpc: backend ve frontend için grpc dosyalarını üretmek için içerisinde pro
 frontend ile ilgili açıklamalar
 
 satranc.wasm backenddeki mantıkla benzer şekilde çalışıyor. onun dışında minimax tabanlı çok basit bir yapay zeka sistemi mevcuttur.
+
+internette bulduğum bir blender satranç modelindeki tahtayı ve fazla taş tekrarlarını kaldırarak programlama ile dinamik hale getirdim.
