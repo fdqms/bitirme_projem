@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<button onclick="sonuc()">hesapla</button>
+	<script src="satranc.js"></script>
+	<script async type="text/javascript">
+
+		var a = false;
+
+		const onRuntimeInitialized = function() {
+			a = true;
+        }
+
+		Module['onRuntimeInitialized'] = onRuntimeInitialized;
+
+		var sonuc = function(){
+			if(a){
+				/*
+				let wrapped = Module.cwrap("aiMove","number",[])
+				let result = wrapped();
+				let array = Module.HEAPU8.subarray(result, result + 4);
+				console.log(array);*/
+
+				var doMove = Module.cwrap("doMove","boolean",["number","number","number","number"]);
+				console.log(doMove(3,1,3,3));
+			}
+		}
+
+
+		/*
+		const arrayData = [];
+		for (let i = 0; i < 4; i++) {
+			arrayData.push(Module.HEAP32[result/Int32Array.BYTES_PER_ELEMENT+i])
+		}
+		console.log(arrayData.length());
+		*/
+
+	</script>
+</body>
+</html>
