@@ -1,0 +1,62 @@
+syntax = "proto3";
+package fdqms;
+
+message Empty{}
+
+message LoginRequest{
+	string username = 1;
+	string password = 2;
+}
+
+message RegisterRequest{
+	string name = 1;
+	string e_mail = 2;
+	string username = 3;
+	string password = 4;
+}
+
+message User{
+	string name = 1;
+	string token = 2;
+}
+
+message Users{
+	repeated User users = 1;
+}
+
+message GameID{
+	int64 id = 1;
+}
+
+message Position {
+	int32 x = 1;
+	int32 y = 2;
+	int32 x2 = 3;
+	int32 y2 = 4;
+	int64 game_id = 5;
+	double w_rem_time = 6;
+	double b_rem_time = 7;
+	int32 piece_type = 8;
+}
+
+message Result {
+	bool successful = 1;
+	double w_rem_time = 2;
+	double b_rem_time = 3;
+}
+
+service SatrancService{
+	rpc Login(LoginRequest) returns (User);
+	rpc Register(RegisterRequest) returns (User);
+
+	rpc CreateGame(Empty) returns (GameID);
+	rpc SearchGame(Empty) returns (GameID);
+	rpc LeaveGame(GameID) returns (Empty);
+	rpc SendDraw(GameID) returns (Empty);
+	rpc AccetpDraw(GameID) returns (Empty);
+	rpc DeclineDraw(GameID) returns (Empty);
+
+	rpc Connect(Empty) returns (stream Position);
+	rpc Move(Position) returns (Result);
+	rpc Promotion(Position) returns (Empty);
+}

@@ -1,0 +1,44 @@
+syntax = "proto3";
+package fdqms;
+
+import "google/api/annotations.proto";
+
+message Empty{}
+
+message LoginInfo{
+	string username = 1;
+	string password = 2;
+}
+
+message LoginRequest{
+	LoginInfo login = 1;
+}
+
+message User{
+	string name = 1;
+	string token = 2;
+}
+
+message Users{
+	repeated User users = 1;
+}
+
+message Position {
+	int32 x = 1;
+	int32 y = 2;
+	int32 x2 = 3;
+	int32 y2 = 4;
+	int32 game_id = 5;
+}
+
+message Result {
+	bool successful = 1;
+}
+
+service SatrancService{
+	rpc Login(LoginRequest) returns (User){
+		option(google.api.http) = { post: "/api/login", body: "*" };
+	}
+	rpc Connect(User) returns (stream Position);
+	rpc Move(Position) returns (Result);
+}

@@ -1,0 +1,2 @@
+docker build -t satranc-proxy-server . 
+docker run -d --name satranc-proxy-server -p 8080:8080 -p 9901:9901 satranc-proxy-server
